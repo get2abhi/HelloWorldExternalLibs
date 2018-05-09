@@ -18,6 +18,10 @@ set_target_properties(lib_gmath PROPERTIES IMPORTED_LOCATION
 # You can define multiple libraries, and CMake builds them for you.
 # Gradle automatically packages shared libraries with your APK.
 
+add_library(lib_adder SHARED IMPORTED)
+set_target_properties(lib_adder PROPERTIES IMPORTED_LOCATION
+    ${distribution_DIR}/adder/lib/${ANDROID_ABI}/libadder-lib.so)
+
 add_library( # Sets the name of the library.
              native-lib
 
@@ -41,7 +45,8 @@ find_library( # Sets the name of the path variable.
               log )
 
 target_include_directories(native-lib PRIVATE
-                           ${distribution_DIR}/gmath/include)
+                           ${distribution_DIR}/gmath/include
+                           ${distribution_DIR}/adder/include)
 
 
 # Specifies libraries CMake should link to your target library. You
@@ -51,4 +56,5 @@ target_include_directories(native-lib PRIVATE
 target_link_libraries( # Specifies the target library.
                        native-lib
                        lib_gmath
+                       lib_adder
                        ${log-lib} )
