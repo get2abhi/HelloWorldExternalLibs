@@ -22,6 +22,9 @@ add_library(lib_adder SHARED IMPORTED)
 set_target_properties(lib_adder PROPERTIES IMPORTED_LOCATION
     ${distribution_DIR}/adder/lib/${ANDROID_ABI}/libadder-lib.so)
 
+# build application's shared lib
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
+
 add_library( # Sets the name of the library.
              native-lib
 
